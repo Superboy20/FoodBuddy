@@ -1,0 +1,215 @@
+﻿<UserControl x:Class="FoodBuddy.Views.EditScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FoodBuddy.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="1400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="175"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!-- Recipe Title -->
+        <Grid Grid.Row="1" Grid.Column="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Background="Beige"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Label>
+                    <TextBlock FontSize="35" TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="0" Text="{Binding CurrentName.Name}"></TextBlock>
+                </Label>
+            </Label>
+
+            <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1, 0, 0, 1"></Border>
+        </Grid>
+
+        <!-- Image (Optional) -->
+        <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="LightSlateGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Content="EDIT IMAGE SCREEN"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+
+            <!--<Button Grid.Row="1" Height="Auto" Width="75" Margin="10" Content="Add Image"></Button>-->
+            <!-- MOVE BUTTON ONTO "EDIT" PAGE LATER ON IN THE DEV PROCESS -->
+
+            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0, 0, 1, 0"></Border>
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0, 0, 1, 1"></Border>
+
+        </Grid>
+
+        <!-- Tools -->
+
+        <Grid Grid.Row="3" Grid.Column="0" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="TOOLS" 
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Aquamarine"></Label>
+
+            <Label Grid.Row="1" Grid.Column="0" Background="LightSalmon"></Label>
+            <Label Grid.Row="1" HorizontalContentAlignment="Center">
+                <Label Margin="25">
+                    <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="0" Text="{Binding CurrentUtensil.Utensil}"></TextBlock>
+                </Label>
+            </Label>
+
+            <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="0, 1, 1, 1"></Border>
+            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="0, 1, 1, 0"></Border>
+        </Grid>
+
+        <!-- Ingredients -->
+        <Grid Grid.Row="3" Grid.Column="1" Grid.RowSpan="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Content="INGREDIENTS" 
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Pink"></Label>
+            <Label Grid.Row="1" Grid.Column="0" Content="#" Background="LightGreen" 
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+            <Label Grid.Row="1" Grid.Column="1" Content="Measurements" Background="LightGreen" 
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+            <Label Grid.Row="1" Grid.Column="2" Content="Ingredients" Background="LightGreen" 
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="LightGreen" 
+                   HorizontalContentAlignment="Center">
+                <Label Margin="25">
+                    <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="0" Text="{Binding CurrentIng.Ing}"></TextBlock>
+                </Label>
+
+            </Label>
+
+            <!--<Label Margin="25">
+                    <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="0" Text="{Binding CurrentIng.Ing}"></TextBlock>
+                </Label>-->
+
+            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="1, 1, 1, 1"></Border>
+            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1, 1, 1, 0"></Border>
+            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1, 1, 1, 1"></Border>
+            <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1, 1, 1, 1"></Border>
+            <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1, 1, 1, 1"></Border>
+        </Grid>
+
+        <!-- Notes -->
+        <Grid Grid.Row="4" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <Label Grid.Row="0" Grid.Column="0" Content="NOTES" Background="LightBlue"
+               HorizontalContentAlignment="Center"></Label>
+            <Label Grid.Row="1" Grid.Column="0" Background="CornflowerBlue"
+               HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+                <Label>
+                    <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding CurrentAdjustments.Adjustments}"></TextBlock>
+                </Label>
+            </Label>
+
+            <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1, 1, 0, 0"></Border>
+            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1, 0, 0, 0"></Border>
+        </Grid>
+
+        <!-- Steps -->
+
+        <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="2" Background="CadetBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="1."></Label>
+            <Label Grid.Row="0" Grid.Column="0" Margin="25">
+                <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="0" Text="{Binding CurrentSteps.Step}"></TextBlock>
+            </Label>
+
+            <Label Grid.Row="0" Grid.Column="1" Content="2."></Label>
+            <Label Grid.Row="0" Grid.Column="1" Margin="25">
+                <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="0" Text="{Binding CurrentSteps.Step}"></TextBlock>
+            </Label>
+
+            <Label Grid.Row="0" Grid.Column="2" Content="3."></Label>
+            <Label Grid.Row="0" Grid.Column="2" Margin="25">
+                <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="0" Text="{Binding CurrentSteps.Step}"></TextBlock>
+            </Label>
+
+            <Label Grid.Row="1" Grid.Column="0" Content="4."></Label>
+            <Label Grid.Row="1" Grid.Column="0" Margin="25">
+                <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="0" Text="{Binding CurrentSteps.Step}"></TextBlock>
+            </Label>
+
+            <Label Grid.Row="1" Grid.Column="1" Content="5."></Label>
+            <Label Grid.Row="1" Grid.Column="1" Margin="25">
+                <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="0" Text="{Binding CurrentSteps.Step}"></TextBlock>
+            </Label>
+
+            <Label Grid.Row="1" Grid.Column="2" Content="6."></Label>
+            <Label Grid.Row="1" Grid.Column="2" Margin="25">
+                <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="0" Text="{Binding CurrentSteps.Step}"></TextBlock>
+            </Label>
+
+            <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1"></Border>
+            <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1"></Border>
+            <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="1"></Border>
+            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1"></Border>
+            <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1"></Border>
+            <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1"></Border>
+        </Grid>
+
+
+
+
+
+
+
+    </Grid>
+</UserControl>

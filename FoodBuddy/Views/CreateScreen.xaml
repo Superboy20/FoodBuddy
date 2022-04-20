@@ -1,0 +1,519 @@
+﻿<UserControl x:Class="FoodBuddy.Views.CreateScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:FoodBuddy.Views" xmlns:components="clr-namespace:FoodBuddy.Components" xmlns:viewmodels="clr-namespace:FoodBuddy.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:CreateViewModel}"
+             mc:Ignorable="d"
+             Background="#11212C"
+             d:DesignHeight="900" d:DesignWidth="1440">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="{TemplateBinding Content}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <TextBlock Text="{TemplateBinding Content}" Foreground="#EBEBEB" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="components:YesNoButton">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="{TemplateBinding Content}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <TextBlock Text="{TemplateBinding Content}" Foreground="#DAD7CD" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Style TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" MaxWidth="4000" Background="#315B5E">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Food Buddy" Foreground="White" Grid.Column="0" FontSize="20" Margin="20 10 10 10" />
+
+            <components:YesNoButton
+
+                Grid.Column="2"
+                Margin="6 10 20 10"
+                FontSize="20"
+                Content="Cancel"
+                Command="{Binding NavigateHomeCommand}"
+                Question="Quit without saving?" />
+
+            <Button x:Name="SubmitButton"
+
+                FontSize="20"
+                Grid.Column="1"
+                Margin="6 10 6 10"
+                Content="Submit"
+                Command="{Binding NavigateHomeCommand}"
+                Click="SubmitButton_Click" />
+
+            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="0 0 0 3" />
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!-- Recipe Title -->
+            <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Background="#1D3749">
+                    <Grid>
+                        <TextBox
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            x:Name="TitleBox"
+                            FontSize="35"
+                            Foreground="White"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            BorderThickness="0"
+                            Background="#1D3749"
+                            Width="Auto"
+                            Height="Auto"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Hidden"
+                            AcceptsReturn="True"
+                            MaxLines="1"
+                            MaxLength="60"
+                            PreviewKeyDown="TitleBox_PreviewKeyDown" />
+                    </Grid>
+                </Grid>
+
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="0"></Border>
+            </Grid>
+
+            <!-- Tools AND Ingredients -->
+
+            <Grid Grid.Row="0" Grid.RowSpan="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="150"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!--TOOLS-->
+
+                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="Things You'll Need"
+                        Foreground="White"
+                        FontSize="20"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="#234258">
+                    </Label>
+
+                    <!--<Label Grid.Row="1" Grid.Column="0" />-->
+
+                    <Grid Grid.Row="1" HorizontalAlignment="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBox
+                                Padding="8"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                Background="#CCCCCC"
+                                Width="180"
+                                x:Name="ToolBox"
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                AcceptsReturn="True"
+                                Height="Auto">
+                            </TextBox>
+                        </Grid>
+                    </Grid>
+
+                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="#11212C" BorderThickness="0" />
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="#11212C" BorderThickness="0,1,1,1" />
+                </Grid>
+
+                <!-- Ingredients -->
+
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="Ingredients"
+                        Foreground="White"
+                        FontSize="20"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="#234258">
+                    </Label>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Content="#"
+                            Foreground="White"
+                            FontSize="14"
+                            Padding="7"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#234258">
+                        </Label>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Content="Measurement"
+                            Foreground="White"
+                            FontSize="13"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#234258">
+                        </Label>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Content="Ingredient"
+                            Foreground="White"
+                            FontSize="13"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#234258">
+                        </Label>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBox
+                                    Padding="6"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
+                                    Background="#CCCCCC"
+                                    Width="180"
+                                    FontSize="16"
+                                    FontWeight="SemiBold"
+                                    x:Name="IngredientBox"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    TextWrapping="Wrap"
+                                    VerticalScrollBarVisibility="Auto"
+                                    AcceptsReturn="True"
+                                    Height="Auto">
+                            </TextBox>
+                        </Grid>
+                    </Grid>
+
+                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="#11212C" BorderThickness="0"></Border>
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="#11212C" BorderThickness="1, 1, 0, 0"></Border>
+                    <Border Grid.Row="3" Grid.Column="1" BorderBrush="#11212C" BorderThickness="1, 1, 0, 1"></Border>
+                </Grid>
+
+                <!--NOTES-->
+
+                <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="#CCCCCC" HorizontalAlignment="Center" Margin="0 0 0 1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="360" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Content="Possible Adjustments (Optional)" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" />
+
+                    <TextBox
+                        Padding="5 0 6 0"
+                        Grid.Row="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="#CCCCCC"
+                        Width="Auto"
+                        FontSize="12"
+                        FontWeight="SemiBold"
+                        Grid.Column="0"
+                        x:Name="NoteBox"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        AcceptsReturn="True"
+                        Height="Auto">
+                    </TextBox>
+
+                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="#11212C" BorderThickness="0 2 0 0" />
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="#11212C" BorderThickness="0 2 0 0" />
+                </Grid>
+            </Grid>
+
+            <!-- Steps -->
+
+            <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="3" Background="#EBEBEB">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="1." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="0" Grid.Column="0" Margin="30 30 30 0">
+                    <TextBox
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        x:Name="StepBox1"
+                        BorderThickness="0"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        HorizontalContentAlignment="Left"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        AcceptsReturn="True"
+                        MaxLines="15"
+                        MaxLength="450">
+                    </TextBox>
+                </Grid>
+
+                <Label Grid.Row="0" Grid.Column="1" Content="2." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="0" Grid.Column="1" Margin="30 30 30 0">
+                    <TextBox
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        x:Name="StepBox2"
+                        BorderThickness="0"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        HorizontalContentAlignment="Left"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        AcceptsReturn="True"
+                        MaxLines="15"
+                        MaxLength="450">
+                    </TextBox>
+                </Grid>
+
+                <Label Grid.Row="0" Grid.Column="2" Content="3." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="0" Grid.Column="2" Margin="30 30 30 0">
+                    <TextBox
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        x:Name="StepBox3"
+                        BorderThickness="0"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        HorizontalContentAlignment="Left"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        AcceptsReturn="True"
+                        MaxLines="15"
+                        MaxLength="450">
+                    </TextBox>
+                </Grid>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="4." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="1" Grid.Column="0" Margin="30 30 30 5">
+                    <TextBox
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        x:Name="StepBox4"
+                        BorderThickness="0"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        HorizontalContentAlignment="Left"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        AcceptsReturn="True"
+                        MaxLines="15"
+                        MaxLength="450">
+                    </TextBox>
+                </Grid>
+
+                <Label Grid.Row="1" Grid.Column="1" Content="5." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="1" Grid.Column="1" Margin="30 30 30 5">
+                    <TextBox
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        x:Name="StepBox5"
+                        BorderThickness="0"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        HorizontalContentAlignment="Left"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        AcceptsReturn="True"
+                        MaxLines="15"
+                        MaxLength="450">
+                    </TextBox>
+                </Grid>
+
+                <Label Grid.Row="1" Grid.Column="2" Content="6." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="1" Grid.Column="2" Margin="30 30 30 5">
+                    <TextBox
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        x:Name="StepBox6"
+                        BorderThickness="0"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        HorizontalContentAlignment="Left"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        AcceptsReturn="True"
+                        MaxLines="15"
+                        MaxLength="450">
+                    </TextBox>
+                </Grid>
+
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1"></Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

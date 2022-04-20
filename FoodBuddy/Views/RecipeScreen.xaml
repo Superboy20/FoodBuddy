@@ -1,0 +1,456 @@
+﻿<UserControl x:Class="FoodBuddy.Views.RecipeScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:FoodBuddy.Views" xmlns:components="clr-namespace:FoodBuddy.Components" xmlns:viewmodels="clr-namespace:FoodBuddy.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:RecipeViewModel}"
+             mc:Ignorable="d"
+             Background="#11212C"
+             d:DesignHeight="900" d:DesignWidth="1440">
+
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="{TemplateBinding Content}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <TextBlock Text="{TemplateBinding Content}" Foreground="#EBEBEB" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" MaxWidth="4000" Background="#315B5E">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Food Buddy" Foreground="White" Grid.Column="0" FontSize="20" Margin="20 10 10 10" />
+
+            <Button
+            FontSize="20"
+            Grid.Column="1"
+            Margin="10 10 6 10"
+            Content="Home"
+            Command="{Binding NavigateHomeCommand}"
+            Visibility="{Binding IsHome, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            <Button
+            FontSize="20"
+            Grid.Column="2"
+            Margin="6 10 6 10"
+            Content="Create"
+            Command="{Binding NavigateCreateCommand}" />
+
+            <Button
+            FontSize="20"
+            Grid.Column="3"
+            Margin="6 10 6 10"
+            Content="Edit"
+            Command="{Binding NavigateRecipeCommand}"
+            Visibility="{Binding IsRecipe, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            <Button
+            FontSize="20"
+            Grid.Column="4"
+            Margin="6 10 20 10"
+            Content="Delete"
+            Command="{Binding NavigateRecipeCommand}"
+            Visibility="{Binding IsRecipe, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" BorderBrush="White" BorderThickness="0 0 0 3" />
+        </Grid>
+
+        <!--<components:NavigationBar Grid.Row="0" DataContext="{Binding NavigationBarViewModel}" />-->
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!-- Recipe Title -->
+            <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Background="#1D3749"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                    <Label>
+                        <TextBlock
+                            FontSize="35"
+                            Foreground="White"
+                            TextWrapping="WrapWithOverflow"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="{Binding CurrentRecipe.Title}" />
+                    </Label>
+                </Label>
+
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="0"></Border>
+            </Grid>
+
+            <!-- Tools AND Ingredients -->
+
+            <Grid Grid.Row="0" Grid.RowSpan="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="130"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!--TOOLS-->
+
+                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="Things You'll Need"
+                        Foreground="White"
+                        FontSize="20"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="#234258">
+                    </Label>
+
+                    <Grid Grid.Row="1" HorizontalAlignment="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Padding="8"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                Background="#CCCCCC"
+                                Width="180"
+                                FontSize="16"
+                                LineStackingStrategy="BlockLineHeight"
+                                LineHeight="16"
+                                FontWeight="SemiBold"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                TextWrapping="Wrap"
+                                Text="{Binding CurrentRecipe.Tools}"
+                                Height="Auto">
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+
+                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="#11212C" BorderThickness="0" />
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="#11212C" BorderThickness="0,1,1,1" />
+                </Grid>
+
+                <!-- Ingredients -->
+
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="Ingredients"
+                        Foreground="White"
+                        FontSize="20"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="#234258">
+                    </Label>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Content="#"
+                            Foreground="White"
+                            FontSize="14"
+                            Padding="7"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#234258">
+                        </Label>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Content="Measurement"
+                            Foreground="White"
+                            FontSize="13"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#234258">
+                        </Label>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Content="Ingredient"
+                            Foreground="White"
+                            FontSize="13"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#234258">
+                        </Label>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Padding="6"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                Background="#CCCCCC"
+                                Width="180"
+                                FontSize="16"
+                                LineStackingStrategy="BlockLineHeight"
+                                LineHeight="16"
+                                FontWeight="SemiBold"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                TextWrapping="Wrap"
+                                Text="{Binding CurrentRecipe.Ingredients}"
+                                Height="Auto">
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+
+                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="#11212C" BorderThickness="0"></Border>
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="#11212C" BorderThickness="1, 1, 0, 0"></Border>
+                    <Border Grid.Row="3" Grid.Column="1" BorderBrush="#11212C" BorderThickness="1, 1, 0, 1"></Border>
+                </Grid>
+
+                <!--NOTES-->
+
+                <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="#CCCCCC" HorizontalAlignment="Center" Margin="0 0 0 1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="360" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Content="Possible Adjustments (Optional)" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" />
+
+                    <TextBlock
+                        Padding="5 3 6 0"
+                        Grid.Row="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="#CCCCCC"
+                        Width="Auto"
+                        FontSize="12"
+                        FontWeight="SemiBold"
+                        Grid.Column="0"
+                        Text="{Binding CurrentRecipe.Notes}"
+                        TextWrapping="Wrap"
+                        Height="Auto">
+                    </TextBlock>
+
+                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="#11212C" BorderThickness="0 2 0 0" />
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="#11212C" BorderThickness="0 2 0 0" />
+                </Grid>
+            </Grid>
+
+            <!-- Steps -->
+
+            <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="3" Background="#EBEBEB">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="1." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="0" Grid.Column="0" Margin="30 30 30 0">
+                    <TextBlock
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="{Binding CurrentRecipe.Step1}"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        TextWrapping="Wrap">
+                    </TextBlock>
+                </Grid>
+
+                <Label Grid.Row="0" Grid.Column="1" Content="2." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="0" Grid.Column="1" Margin="30 30 30 0">
+                    <TextBlock
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="{Binding CurrentRecipe.Step2}"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        TextWrapping="Wrap">
+                    </TextBlock>
+                </Grid>
+
+                <Label Grid.Row="0" Grid.Column="2" Content="3." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="0" Grid.Column="2" Margin="30 30 30 0">
+                    <TextBlock
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="{Binding CurrentRecipe.Step3}"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        TextWrapping="Wrap">
+                    </TextBlock>
+                </Grid>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="4." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="1" Grid.Column="0" Margin="30 30 30 5">
+                    <TextBlock
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="{Binding CurrentRecipe.Step4}"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        TextWrapping="Wrap">
+                    </TextBlock>
+                </Grid>
+
+                <Label Grid.Row="1" Grid.Column="1" Content="5." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="1" Grid.Column="1" Margin="30 30 30 5">
+                    <TextBlock
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="{Binding CurrentRecipe.Step5}"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        TextWrapping="Wrap">
+                    </TextBlock>
+                </Grid>
+
+                <Label Grid.Row="1" Grid.Column="2" Content="6." FontSize="30" Padding="5"></Label>
+                <Grid Grid.Row="1" Grid.Column="2" Margin="30 30 30 5">
+                    <TextBlock
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontSize="15"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="{Binding CurrentRecipe.Step6}"
+                        Background="#EBEBEB"
+                        Width="Auto"
+                        TextWrapping="Wrap">
+                    </TextBlock>
+                </Grid>
+
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1"></Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

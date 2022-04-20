@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodBuddy", "FoodBuddy\FoodBuddy.csproj", "{3CF21AFB-42C4-4055-A201-88BB4331A4EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CF21AFB-42C4-4055-A201-88BB4331A4EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF21AFB-42C4-4055-A201-88BB4331A4EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF21AFB-42C4-4055-A201-88BB4331A4EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF21AFB-42C4-4055-A201-88BB4331A4EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {2D4B6C40-8726-46D5-B16C-B0E2720B5CA8}
+	EndGlobalSection
+EndGlobal
